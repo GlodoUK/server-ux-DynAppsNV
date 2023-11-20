@@ -5,12 +5,14 @@
         <field name="model">ir.actions.server</field>
         <field name="inherit_id" ref="base.view_server_action_form" />
         <field name="arch" type="xml">
-            <page name="security" position="before">
-                <page
+            <sheet position="inside">
+
+                <div
                     name="mass_edit_line_ids"
                     string="Fields"
-                    attrs="{'invisible': [('state', '!=', 'mass_edit')]}"
+                    invisible="state != 'mass_edit'"
                 >
+                    <separator string="Mass Edit" />
                     <field name="mass_edit_line_ids" nolabel="1">
                         <tree editable="bottom">
                             <field name="model_id" invisible="1" />
@@ -28,20 +30,20 @@
                     <div
                         colspan="2"
                         class="text-warning"
-                        attrs="{'invisible': [('mass_edit_apply_domain_in_lines', '=', False)]}"
+                        invisible="not mass_edit_apply_domain_in_lines"
                     >
                         <b
                         >WARNING</b>: Take into account that adding a field with a domain, and not including the fields of such domain in this operation definition, will lead to an error when trying to perform it. Make sure you include them.
                     </div>
-                </page>
-                <page
+                </div>
+                <div
                     name="mass_edit_message"
                     string="Message"
-                    attrs="{'invisible': [('state', '!=', 'mass_edit')]}"
+                    invisible="state != 'mass_edit'"
                 >
                     <field name="mass_edit_message" />
-                </page>
-            </page>
+                </div>
+            </sheet>
         </field>
     </record>
 
